@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import boardgame.Board;
 import boardgame.Piece;
 import boardgame.Position;
+import chess.pieces.Bishop;
 import chess.pieces.King;
 import chess.pieces.Pawn;
 import chess.pieces.Rook;
@@ -195,17 +196,23 @@ public class ChessMatch {
 	
 	private void initialSetup() {
 		//ROOKS
-		placeNewPiece('a', 8, new Rook(board, Color.BLACK));
-		placeNewPiece('h', 8, new Rook(board, Color.BLACK));
-		
 		placeNewPiece('h', 1, new Rook(board, Color.WHITE));
 		placeNewPiece('a', 1, new Rook(board, Color.WHITE));
 		
+		placeNewPiece('a', 8, new Rook(board, Color.BLACK));
+		placeNewPiece('h', 8, new Rook(board, Color.BLACK));		
+		
+		//BISHOPS
+		placeNewPiece('c', 1, new Bishop(board, Color.WHITE));
+		placeNewPiece('f', 1, new Bishop(board, Color.WHITE));
+		
+		placeNewPiece('c', 8, new Bishop(board, Color.BLACK));
+		placeNewPiece('f', 8, new Bishop(board, Color.BLACK));
 		
 		//Kings
-		placeNewPiece('e', 8,  new King(board, Color.BLACK));
-		
 		placeNewPiece('e', 1, new King(board, Color.WHITE));
+		
+		placeNewPiece('e', 8,  new King(board, Color.BLACK));		
 		
 		//Pawns
 		placeNewPiece('a', 2, new Pawn(board, Color.WHITE));
