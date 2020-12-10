@@ -1,6 +1,5 @@
 package chess;
 
-import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -125,7 +124,7 @@ public class ChessMatch {
 			throw new IllegalStateException("There is no piece to be promoted");
 		}
 		if (!type.equals("B") && !type.equals("N") && !type.equals("R") && !type.equals("Q")) {
-			throw new InvalidParameterException("Invalid type for promotion");
+			return promoted;
 		}
 		
 		Position pos = promoted.getChessPosition().toPosition();
@@ -291,7 +290,6 @@ public class ChessMatch {
 		return false;		
 	}
 	
-	//bug in checkmate logic, it keeps mating the opponent when the position is only a check
 	private boolean testCheckMate(Color color) {
 		if (!testCheck(color)) {
 			return false;
@@ -300,7 +298,7 @@ public class ChessMatch {
 		for (Piece p : list) {
 			boolean[][] mat = p.possibleMoves();
 			for (int i=0; i<board.getRows(); i++) {
-				for (int j=0; i<board.getColumns(); i++) {
+				for (int j=0; j<board.getColumns(); j++) {
 					if (mat[i][j]) {
 						Position source = ((ChessPiece)p).getChessPosition().toPosition();
 						Position target = new Position(i, j);
@@ -314,8 +312,7 @@ public class ChessMatch {
 				}
 			}			
 		}
-		return true;
-		
+		return true;		
 	}
 	
 	private void placeNewPiece(char column, int row, ChessPiece piece) {
